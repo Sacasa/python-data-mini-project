@@ -72,15 +72,15 @@ def get_usefull_data(liste):
 
     return prepared_list
 
-def filter_out_small_plants(liste):
+def filter_out_small_plants(liste, cap):
     """
         Retourne les stations sans celle ayant une capacité de moins
         de 10 MW
     """
-    return [station for station in liste if station[2] > 10.0]
+    return [station for station in liste if station[2] > cap]
 
 
-def main():
+def get_data_plants():
     """
         Fonction principale qui va récupérer les données puis tout trier
     """
@@ -88,19 +88,13 @@ def main():
     url_data = urllib.request.urlopen(url)
     data = url_data.read().decode('utf8')
 
-    counter = 0
-
     raw_list = parse_html(data)
     filtered_open_list = filter_open(raw_list)
     filter_coordinates(filtered_open_list)
     prepared_data = get_usefull_data(filtered_open_list)
-    prepared_data = filter_out_small_plants(prepared_data)
+    prepared_data = filter_out_small_plants(prepared_data, 100.0)
 
-    for station in prepared_data:
-        print_station_tri(station)
-        counter += 1
-
-    print("Il y a {} power stations".format(counter))
+    return prepared_data
 
 if __name__ == "__main__":
-    main()
+    get_data_plants()
