@@ -74,10 +74,9 @@ def get_usefull_data(liste):
 
 def filter_out_small_plants(liste, cap):
     """
-        Retourne les stations sans celle ayant une capacité de moins
-        de 10 MW
+        Retourne les cap plus grandes stations
     """
-    return [station for station in liste if station[2] > cap]
+    return sorted(liste,key=lambda x: x[2])[-cap:]
 
 
 def get_data_plants():
@@ -92,7 +91,7 @@ def get_data_plants():
     filtered_open_list = filter_open(raw_list)
     filter_coordinates(filtered_open_list)
     prepared_data = get_usefull_data(filtered_open_list)
-    prepared_data = filter_out_small_plants(prepared_data, 100.0)
+    prepared_data = filter_out_small_plants(prepared_data, 20)
 
     return prepared_data
 
