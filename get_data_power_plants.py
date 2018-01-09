@@ -76,7 +76,7 @@ def filter_out_small_plants(liste, cap):
     """
         Retourne les cap plus grandes stations
     """
-    return sorted(liste,key=lambda x: x[2])[-cap:]
+    return sorted(liste, key=lambda x: x[2])[-cap:]
 
 
 def get_data_plants():
