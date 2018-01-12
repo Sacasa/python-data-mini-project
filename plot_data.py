@@ -21,7 +21,8 @@ def get_data(tab_urls):
     total = []
 
     for url in tab_urls:
-        total += requests.get(url, params={}, headers=headers).json()['data']
+        print(requests.get(url, params={}, headers=headers).json())
+        # total += requests.get(url, params={}, headers=headers).json()['data']
 
     return total
 
@@ -43,20 +44,22 @@ def plot_scales(tab, fig, x_label, y_label, titre):
             titre: titre du graphique
         Va afficher avec pyplot un histogramme des données étudiées
     """
+    maximum = float(max(tab))
     list_low = [x for x in tab if x <= 200]
     list_moderate = [x for x in tab if x <= 300 and x > 200]
     list_high = [x for x in tab if x <= 400 and x > 300]
     list_veryhigh = [x for x in tab if x > 400]
 
     bins = list(range(min(tab), max(tab), 10))
-    plt.hist(list_low, bins=bins, color="#33cc33", label="Très faible")
-    plt.hist(list_moderate, bins=bins, color="yellow", label="Modéré")
-    plt.hist(list_high, bins=bins, color="orange", label="Elevé")
-    plt.hist(list_veryhigh, bins=bins, color="red", label="Très élevé")
+    plt.hist(list_low, bins=bins, color="#33cc33", label="Très faible", rwidth=0.9)
+    plt.hist(list_moderate, bins=bins, color="yellow", label="Modéré", rwidth=0.9)
+    plt.hist(list_high, bins=bins, color="orange", label="Elevé", rwidth=0.9)
+    plt.hist(list_veryhigh, bins=bins, color="red", label="Très élevé", rwidth=0.9)
 
     plt.xlabel(x_label)
     plt.ylabel(y_label)
-    plt.title(titre)
+    plt.title("Impact environnemental de la production d'électricité\nau Royaume Uni "+titre+\
+        " entre le 26/09/17 et le 19/12/17")
     plt.legend()
     fig.show()
 
@@ -94,25 +97,25 @@ def main():
 
     nuit = plt.figure(1)
     plot_scales(list_nuit, nuit, "Facteur d'émission de C02(gCO2.kWh)", \
-                'Nombre de fois atteint', 'NUIT')
+                'Nombre de fois atteint', "la nuit")
 
     #------------------------------------------
 
     jour = plt.figure(2)
     plot_scales(list_jour, jour, "Facteur d'émission de C02(gCO2.kWh)", \
-                'Nombre de fois atteint', 'JOUR')
+                'Nombre de fois atteint', "le jour")
 
     #------------------------------------------
 
     semaine = plt.figure(3)
     plot_scales(list_semaine, semaine, "Facteur d'émission de C02(gCO2.kWh)", \
-                'Nombre de fois atteint', 'SEMAINE')
+                'Nombre de fois atteint', "la semaine")
 
     #------------------------------------------
 
     weekend = plt.figure(4)
     plot_scales(list_weekend, weekend, "Facteur d'émission de C02(gCO2.kWh)", \
-                'Nombre de fois atteint', 'WEEKEND')
+                'Nombre de fois atteint', "le week-end")
 
     input()
 
