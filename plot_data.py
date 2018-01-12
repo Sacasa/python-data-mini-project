@@ -49,15 +49,15 @@ def plot_scales(tab, fig, x_label, y_label, titre):
     list_veryhigh = [x for x in tab if x > 400]
 
     bins = list(range(min(tab), max(tab), 10))
-    plt.hist(list_low, bins=bins)
-    plt.hist(list_high, bins=bins)
-    plt.hist(list_moderate, bins=bins)
-    plt.hist(list_veryhigh, bins=bins)
+    plt.hist(list_low, bins=bins, color="#33cc33", label="Très faible")
+    plt.hist(list_moderate, bins=bins, color="yellow", label="Modéré")
+    plt.hist(list_high, bins=bins, color="orange", label="Elevé")
+    plt.hist(list_veryhigh, bins=bins, color="red", label="Très élevé")
 
     plt.xlabel(x_label)
     plt.ylabel(y_label)
     plt.title(titre)
-
+    plt.legend()
     fig.show()
 
 def main():
