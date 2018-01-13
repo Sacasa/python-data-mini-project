@@ -21,8 +21,7 @@ def get_data(tab_urls):
     total = []
 
     for url in tab_urls:
-        print(requests.get(url, params={}, headers=headers).json())
-        # total += requests.get(url, params={}, headers=headers).json()['data']
+        total += requests.get(url, params={}, headers=headers).json()['data']
 
     return total
 
@@ -51,10 +50,10 @@ def plot_scales(tab, fig, x_label, y_label, titre):
     list_veryhigh = [x for x in tab if x > 400]
 
     bins = list(range(min(tab), max(tab), 10))
-    plt.hist(list_low, bins=bins, color="#33cc33", label="Très faible", rwidth=0.9)
-    plt.hist(list_moderate, bins=bins, color="yellow", label="Modéré", rwidth=0.9)
-    plt.hist(list_high, bins=bins, color="orange", label="Elevé", rwidth=0.9)
-    plt.hist(list_veryhigh, bins=bins, color="red", label="Très élevé", rwidth=0.9)
+    plt.hist(list_low, bins=bins, color="#33cc33", label="Très faible", edgecolor="#006600")
+    plt.hist(list_moderate, bins=bins, color="yellow", label="Modéré", edgecolor="#cccc00")
+    plt.hist(list_high, bins=bins, color="orange", label="Elevé", edgecolor="#e65c00")
+    plt.hist(list_veryhigh, bins=bins, color="red", label="Très élevé", edgecolor="#cc0000")
 
     plt.xlabel(x_label)
     plt.ylabel(y_label)
