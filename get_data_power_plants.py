@@ -7,15 +7,6 @@
 import urllib.request
 from bs4 import BeautifulSoup
 
-def print_station_tri(station):
-    """
-        Affiche une station lorsque le traitement est finit
-    """
-    print("Coordinates : ", station[0])
-    print("Type: ", station[1])
-    print("Capacity (MW) : ", station[2])
-    print("===================================================")
-
 def parse_html(html_data):
     """
         Récupère les tables contenant les données utiles

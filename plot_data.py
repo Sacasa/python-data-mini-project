@@ -43,7 +43,6 @@ def plot_scales(tab, fig, x_label, y_label, titre):
             titre: titre du graphique
         Va afficher avec pyplot un histogramme des données étudiées
     """
-    maximum = float(max(tab))
     list_low = [x for x in tab if x <= 200]
     list_moderate = [x for x in tab if x <= 300 and x > 200]
     list_high = [x for x in tab if x <= 400 and x > 300]
